@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class HomePage extends StatefulWidget {
   @override
@@ -8,6 +9,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   static List<int> snakePosition = [45, 65, 85, 105, 125];
   int numberOfSquares = 760;
+
+  int food = Random().nextInt(700);
+
+  void generateFood() {
+    food = Random().nextInt(700);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +34,36 @@ class _HomePageState extends State<HomePage> {
                   itemBuilder: (BuildContext context, int index) {
                     if (snakePosition.contains(index)) {
                       return Center(
-                        child: Container(),
+                        child: Container(
+                          padding: EdgeInsets.all(2),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: Container(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                    if (index == food) {
+                      return Container(
+                        padding: EdgeInsets.all(2),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: Container(
+                            color: Colors.green,
+                          ),
+                        ),
+                      );
+                    } else {
+                      return Container(
+                        padding: EdgeInsets.all(2),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: Container(
+                            color: Colors.grey[900],
+                          ),
+                        ),
                       );
                     }
                   },
