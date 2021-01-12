@@ -57,6 +57,11 @@ class _HomePageState extends State<HomePage> {
           break;
         default:
       }
+
+      if (snakePosition.last == food) {
+      } else {
+        snakePosition.removeAt(0);
+      }
     });
   }
 
@@ -136,11 +141,26 @@ class _HomePageState extends State<HomePage> {
               children: [
                 GestureDetector(
                   onTap: startGame,
-                  child: Text(
-                    "S T A R T   G A M E",
-                    style: TextStyle(
-                      color: Colors.white,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      color: Colors.red,
+                      child: Text(
+                        "S T A R T   G A M E",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                      ),
                     ),
+                  ),
+                ),
+                Text(
+                  "@ F i n n k e l l",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
                   ),
                 ),
               ],
