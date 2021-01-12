@@ -34,6 +34,27 @@ class _HomePageState extends State<HomePage> {
             snakePosition.add(snakePosition.last + 20);
           }
           break;
+        case 'up':
+          if (snakePosition.last < 20) {
+            snakePosition.add(snakePosition.last - 20 + 760);
+          } else {
+            snakePosition.add(snakePosition.last - 20);
+          }
+          break;
+        case 'left':
+          if (snakePosition.last % 20 == 0) {
+            snakePosition.add(snakePosition.last - 1 + 20);
+          } else {
+            snakePosition.add(snakePosition.last - 1);
+          }
+          break;
+        case 'right':
+          if ((snakePosition.last + 1) % 20 == 0) {
+            snakePosition.add(snakePosition.last + 1 - 20);
+          } else {
+            snakePosition.add(snakePosition.last + 1);
+          }
+          break;
         default:
       }
     });
@@ -47,20 +68,20 @@ class _HomePageState extends State<HomePage> {
         children: [
           Expanded(
             child: GestureDetector(
-              // onVerticalDragUpdate: (details) {
-              //   if (direction != 'up' && details.delta.dy > 0) {
-              //     direction = 'down';
-              //   } else if (direction != 'down' && details.delta.dy < 0) {
-              //     direction = 'up';
-              //   }
-              // },
-              // onHorizontalDragUpdate: (details) {
-              //   if (direction != 'left' && details.delta.dx > 0) {
-              //     direction = 'right';
-              //   } else if (direction != 'right' && details.delta.dx < 0) {
-              //     direction = 'left';
-              //   }
-              // },
+              onVerticalDragUpdate: (details) {
+                if (direction != 'up' && details.delta.dy > 0) {
+                  direction = 'down';
+                } else if (direction != 'down' && details.delta.dy < 0) {
+                  direction = 'up';
+                }
+              },
+              onHorizontalDragUpdate: (details) {
+                if (direction != 'left' && details.delta.dx > 0) {
+                  direction = 'right';
+                } else if (direction != 'right' && details.delta.dx < 0) {
+                  direction = 'left';
+                }
+              },
               child: Container(
                 child: GridView.builder(
                   physics: NeverScrollableScrollPhysics(),
@@ -106,6 +127,23 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(bottom: 20, left: 20, right: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: startGame,
+                  child: Text(
+                    "S T A R T   G A M E",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
