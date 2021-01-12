@@ -8,7 +8,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  static List<int> snakePosition = [45, 65, 85, 105, 125];
+  static List<int> snakePosition = [45, 65, 85, 105, 125, 145];
   int numberOfSquares = 760;
   int food = Random().nextInt(700);
   var direction = 'down';
@@ -18,11 +18,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   void startGame() {
+    // snakePosition = [45, 65, 85, 105, 125, 145];
     const duration = Duration(milliseconds: 200);
     Timer.periodic(duration, (Timer timer) {
       updateSnake();
       if (gameOver()) {
         timer.cancel();
+        _showGameOverScreen();
       }
     });
   }
@@ -82,6 +84,26 @@ class _HomePageState extends State<HomePage> {
       }
     }
     return false;
+  }
+
+  void _showGameOverScreen() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Center(child: Text(" G A M E   O V E R ")),
+            content: Text("score: " + snakePosition.length.toString()),
+            actions: [
+              FlatButton(
+                child: Text('Play again'),
+                onPressed: () {
+                  startGame();
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
   }
 
   @override
