@@ -21,6 +21,9 @@ class _HomePageState extends State<HomePage> {
     const duration = Duration(milliseconds: 200);
     Timer.periodic(duration, (Timer timer) {
       updateSnake();
+      if (gameOver()) {
+        timer.cancel();
+      }
     });
   }
 
@@ -64,6 +67,21 @@ class _HomePageState extends State<HomePage> {
         snakePosition.removeAt(0);
       }
     });
+  }
+
+  bool gameOver() {
+    for (int i = 0; i < snakePosition.length; i++) {
+      int count = 0;
+      for (int j = 0; j < snakePosition.length; j++) {
+        if (snakePosition[i] == snakePosition[j]) {
+          count += 1;
+        }
+        if (count == 2) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   @override
