@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void startGame() {
-    const duration = Duration(milliseconds: 300);
+    const duration = Duration(milliseconds: 200);
     Timer.periodic(duration, (Timer timer) {
       updateSnake();
     });
@@ -59,6 +59,7 @@ class _HomePageState extends State<HomePage> {
       }
 
       if (snakePosition.last == food) {
+        generateFood();
       } else {
         snakePosition.removeAt(0);
       }
