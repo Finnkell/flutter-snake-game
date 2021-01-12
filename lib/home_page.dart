@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void startGame() {
-    // snakePosition = [45, 65, 85, 105, 125, 145];
+    snakePosition = [45, 65, 85, 105, 125, 145];
     const duration = Duration(milliseconds: 200);
     Timer.periodic(duration, (Timer timer) {
       updateSnake();
